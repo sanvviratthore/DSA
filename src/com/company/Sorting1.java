@@ -35,6 +35,24 @@ public class Sorting1 {
      }
  }
 
+ // optimized with tc as O(n)
+ public static void modifiedBubbleSort(int arr[]){
+     for(int i=0; i<arr.length; i++){
+         boolean swapped= false;
+         for(int j=0; j< arr.length-1-i; j++){
+             if(arr[j]>arr[j+1]) {
+                 int temp = arr[j];
+                 arr[j] = arr[j + 1];
+                 arr[j + 1] = temp;
+                 swapped = true;
+             }
+         }
+         if(swapped==false){
+             break;
+         }
+     }
+ }
+
 
 //    public static void selectionSort(int arr[]){
 //        for(int i=0; i< arr.length-1; i++){
@@ -163,7 +181,8 @@ public class Sorting1 {
         //Arrays.sort(num,0,3);
         //Arrays.sort(num, Collections.reverseOrder());
         //Arrays.sort(num,0,3, Collections.reverseOrder());
-        countingSort(num);
+        //countingSort(num);
+        modifiedBubbleSort(num);
         printArray(num);
     }
 }

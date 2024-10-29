@@ -48,10 +48,10 @@ public class RecursionAdv {
     }
 
     public static void main(String[] args) {
-        //System.out.println(tiling(3));
+        System.out.println(tiling(3));
         //String str="appnnacollege";
         //removeDuplicates(str, 0, new StringBuilder(""),new boolean[26]);
         //System.out.println(friendsPairing(4));
-        printBinStrings(3,0,"");
+       // printBinStrings(3,0,"");
     }
 }
