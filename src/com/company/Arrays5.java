@@ -38,11 +38,10 @@ public class Arrays5 {
         if(ms==0){
            for(int i=0; i< num.length; i++){
                sm=Math.max(sm,num[i]);
-               }
-           return sm;
            }
+           return sm;
+        }
         return ms;
-
     }
 
     public static int trappedRainwater(int height[]){

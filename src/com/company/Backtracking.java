@@ -17,18 +17,37 @@ public class Backtracking {
         arr[i]=arr[i]-2; // backtracking step
     }
 
-    public static void findSubsets(String str, String ans, int i){
+//    public static void findSubsets(String str, String ans, int i){
+//        // base case
+//        if(i==str.length()){
+//            if(ans.length()==0){
+//                System.out.println("null");
+//            } else{
+//                System.out.println(ans);
+//            }
+//            return;
+//        }
+//        //yes choice
+//        findSubsets(str,ans+str.charAt(i),i+1);
+//        //no choice
+//        findSubsets(str,ans,i+1);
+//    }
+
+    public static void findSubsets(String str, StringBuilder ans, int i){
+        // base case
         if(i==str.length()){
-            if(ans.length()==0){
+            if(ans.isEmpty()){
                 System.out.println("null");
             } else{
                 System.out.println(ans);
             }
             return;
         }
-        //yes choice
-        findSubsets(str,ans+str.charAt(i),i+1);
-        //no choice
+
+        // yes choice
+        findSubsets(str, ans.append(str.charAt(i)),i+1);
+        ans.deleteCharAt(ans.length()-1);
+        // no choice
         findSubsets(str,ans,i+1);
     }
 
@@ -132,25 +151,25 @@ public class Backtracking {
 //        int arr[]=new int[5];
 //        changeArr(arr,0,1);
 //        printArr(arr);
-//        String str="abc";
-//        findSubsets(str,"",0);
+        String str="abc";
+        findSubsets(str, new StringBuilder(""),0);
 //        findPermutation("abc","");
 
-        int n=4;
-        char board[][] = new char[n][n];
-        // initialize
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n ; j++){
-                board[i][j]='x';
-            }
-        }
-
-        if(nQueens(board,0)){
-            System.out.println("solution is possible");
-            printBoard(board);
-         } else{
-            System.out.println("solution is not possible");
-        }
+//        int n=4;
+//        char board[][] = new char[n][n];
+//        // initialize
+//        for(int i=0; i<n; i++){
+//            for(int j=0; j<n ; j++){
+//                board[i][j]='x';
+//            }
+//        }
+//
+//        if(nQueens(board,0)){
+//            System.out.println("solution is possible");
+//            printBoard(board);
+//         } else{
+//            System.out.println("solution is not possible");
+//        }
         //nQueens(board,0);
         //System.out.println("Total ways to solve N-Queens: "+count);
     }
