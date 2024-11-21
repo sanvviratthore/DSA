@@ -1,5 +1,7 @@
 package com.company;
 
+import javax.swing.text.StyledEditorKit;
+
 public class LinkedList {
     public static class Node{
         int data;
@@ -88,27 +90,25 @@ public class LinkedList {
     }
 
     public int removeLast(){
-        if(size==0){
+        if(size == 0){
             System.out.println("LL is empty");
             return Integer.MIN_VALUE;
-        } else if(size==1){
-            int val= head.data;
-            head=tail=null;
-            size=0;
-            return val;
         }
-        // prev : i=size-2
-        Node prev=head;
+        if(size == 1){
+            int val= head.data; // Store the value of the single node.
+            head=tail=null;    // Set both head and tail to null to indicate the list is now empty.
+            size=0;           // Update the size of the list.
+            return val;      // Return the value of the removed node.
+        }
+        Node prev = head; // Start from the head.
         for(int i=0; i<size-2; i++){
-            prev=prev.next;
+            prev = prev.next; // Traverse the list until reaching the node before the last node.
         }
-
-        // when we complete this for lop we stand at prev node that it before tail
-        int val=prev.next.data; //tail.data
-        prev.next=null;
-        tail=prev;
-        size--;
-        return val;
+        int val=prev.next.data; // Store the value of the last node (tail).
+        prev.next=null;          // Break the link to the last node.
+        tail=prev;              // Update the tail to point to the second-to-last node.
+        size--;                  // Decrement the size of the list.
+        return val;              // Return the value of the removed node.
     }
     public int itrSearch(int key){ //O(n)
         Node temp=head;
@@ -138,7 +138,7 @@ public class LinkedList {
         if(idx==-1){
             return -1;
         }
-        return idx+1;
+        return idx+1; // Add 1 to the index found in the rest of the list to account for the current node.
     }
     public int recSearch(int key){ //O(n)
         return helper(head,key);
