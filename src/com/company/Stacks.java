@@ -119,11 +119,60 @@ public class Stacks {
             System.out.println(s.pop());
         }
     }
-    public static void main(String[] args) {
+
+    public static void stockSpan(int[] stocks, int[] span){
         Stack<Integer> s = new Stack<>();
-        s.push(1);
-        s.push(2);
-        s.push(3);
+        span[0] = 1;
+        s.push(0);
+
+        for(int i=1; i< stocks.length; i++) {
+            int currPrice = stocks[i];
+            while (!s.isEmpty() && currPrice > stocks[s.peek()]) {
+                s.pop();
+            }
+            if (s.isEmpty()) {
+                span[i] = i + 1;
+            } else {
+                int prevHigh = s.peek();
+                span[i] = i - prevHigh;
+            }
+            s.push(i);
+        }
+    }
+
+    public static boolean isValid(String str){ //O(n)
+        Stack<Character> s = new Stack<>();
+
+        for(int i=0; i<str.length(); i++){
+            char ch = str.charAt(i);
+
+            if(ch == '(' || ch == '{' || ch == '['){ //opening
+                s.push(ch);
+            } else{
+                //closing
+                if(s.isEmpty()){
+                    return false;
+                }
+                if( (s.peek() == '(' && ch == ')') //()
+                 || (s.peek() == '{' && ch == '}') //{}
+                 || (s.peek() == '[' && ch == ']')){ //[]
+                    s.pop();
+                } else{
+                    return false;
+                }
+            }
+        }
+        if(s.isEmpty()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+    public static void main(String[] args) {
+        //Stack<Integer> s = new Stack<>();
+//        s.push(1);
+//        s.push(2);
+//        s.push(3);
 
 //        while (!s.isEmpty()){
 //            System.out.println(s.peek());
@@ -137,8 +186,44 @@ public class Stacks {
 //        String str = "abc";
 //        System.out.println(reverseString(str));
        // 3 2 1
-        reverseStack(s);
-        printStack(s);
+//        reverseStack(s);
+//        printStack(s);
         //1 2 3
+
+//        int[] stocks = {100,80,60,70,60,85,100};
+//        int[] span = new int[stocks.length];
+//        stockSpan(stocks,span);
+//
+//        for(int i=0; i< span.length; i++){
+//            System.out.println(span[i]+" ");
+//        }
+
+//        int arr[] = {6,8,0,1,3};
+//        Stack<Integer> s= new Stack<>();
+//        int[] nextGreater = new int[arr.length];
+//
+//        for(int i=arr.length-1; i>=0 ; i--){
+//            //1 while
+//            while (!s.isEmpty() && arr[s.peek()]<=arr[i]){
+//                s.pop();
+//            }
+//
+//            //2 if-else
+//            if(s.isEmpty()){
+//                nextGreater[i]=-1;
+//            } else{
+//                nextGreater[i]=arr[s.peek()];
+//            }
+//
+//            //3 push in s
+//            s.push(i);
+//        }
+//        for(int i=0; i< nextGreater.length; i++){
+//            System.out.print(nextGreater[i]+" ");
+//        }
+//        System.out.println();
+
+        String str = "({})[]";
+        System.out.println(isValid(str));
     }
 }
