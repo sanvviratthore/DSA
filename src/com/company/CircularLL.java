@@ -9,12 +9,12 @@ public class CircularLL {
 
     static Node addToEmpty(Node last, int data){
         if(last!=null){
-            return last;
+            return last; //If last is not null, it means the list is not empty. The function directly returns the last node without making any changes.
         }
         Node newNode = new Node();
         newNode.data=data;
         last=newNode;
-        newNode.next=last;
+        newNode.next=last; //Since this is for an empty circular linked list, the new node's next pointer is set to point to itself.
         return last;
     }
 
@@ -24,7 +24,7 @@ public class CircularLL {
         }
         Node newNode = new Node();
         newNode.data=data;
-        newNode.next=last.next;
+        newNode.next=last.next; //newNode points to head now
         last.next=newNode;
         return last;
     }
@@ -41,6 +41,61 @@ public class CircularLL {
         return last;
     }
 
+    static Node addAfter(Node last, int data, int item){
+        if(last == null){
+            return null;
+        }
+
+        Node newNode, p;
+        p = last.next;
+        do{
+            if(p.data == item){
+                newNode = new Node();
+                newNode.data = data;
+                newNode.next = p.next;
+                p.next = newNode;
+
+                if(p == last){
+                    last = newNode;
+                }
+                return last;
+            }
+            p = p.next;
+        } while (p!=last.next);
+
+        System.out.println(item+" the given node is not present in the list");
+        return last;
+    }
+
+    static Node deleteNode(Node last, int key){
+        if(last == null){
+            return null;
+        }
+
+        if(last.data == key && last.next==last){
+            last = null;
+            return last;
+        }
+
+        //key to be removed is at last
+        Node temp = last, d = new Node();
+        if(last.data == key){
+            while (temp.next!=last){
+                temp=temp.next;
+            }
+            temp.next=last.next;
+            last=temp.next;
+        }
+
+        while (temp.next!=last && temp.next.data!=key){
+            temp=temp.next;
+        }
+        if(temp.next.data==key){
+            d = temp.next;
+            temp.next = d.next;
+        }
+        return last;
+    }
 
     static void traverse(Node last){
         Node p;
@@ -48,11 +103,12 @@ public class CircularLL {
             System.out.println("List is empty");
             return;
         }
-        p=last.next;
+        p=last.next; // pointing to head where they're connected
         do{
             System.out.print(p.data+" ");
             p=p.next;
         } while (p!=last.next);
+        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -60,8 +116,9 @@ public class CircularLL {
         last = addToEmpty(last,6);
         last=addFront(last,2);
         last=addEnd(last,8);
+        last = addAfter(last, 10, 2);
         traverse(last);
-        //deleteNode(last,8);
+        deleteNode(last,8);
         traverse(last);
     }
 }
